@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
-
-import pandas as pd
+import math
 
 def create_board():
     # Define the columns and rows labels
@@ -76,7 +75,10 @@ def is_valid_move(board, move, player, can_castle=True):
     
     # Get the piece at the current square
     piece = board.iloc[current_row, current_col]
-    
+
+    if math.isnan(piece):
+        return False
+
     # Check if the current player is moving their own piece
     if player == 'white' and piece.islower():
         return False
