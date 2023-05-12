@@ -111,12 +111,16 @@ def is_valid_move(board, move, player, can_castle=True):
         return dest_row == current_row + 1 and dest_col == current_col
     return False
 
+# Define the dictionary of piece symbols and their corresponding Unicode characters
+PIECE_UNICODE = {'p': '♙', 'n': '♘', 'b': '♗', 'r': '♖', 'q': '♕', 'k': '♔',
+                 'P': '♟', 'N': '♞', 'B': '♝', 'R': '♜', 'Q': '♛', 'K': '♚'}
+
+# Modify the display_board function to use the dictionary to render the board
 def display_board(board):
-    board_display = board.fillna(' ').applymap(str)
     print('    a b c d e f g h')
     print('  +------------------------+')
     for i in range(8):
-        row = ' '.join(board_display.iloc[i, j] for j in range(8))
+        row = ' '.join(PIECE_UNICODE.get(str(board.iloc[i, j]), ' ') for j in range(8))
         print(f'{8 - i} | {row} | {8 - i}')
     print('  +------------------------+')
     print('    a b c d e f g h')
